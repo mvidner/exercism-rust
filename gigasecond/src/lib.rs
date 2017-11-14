@@ -1,7 +1,5 @@
 extern crate chrono;
-extern crate time;
-use chrono::prelude::*;
-use time::Duration;
+use chrono::*;
 
 // Returns a Utc DateTime one billion seconds after start.
 pub fn after(start: DateTime<Utc>) -> DateTime<Utc> {
