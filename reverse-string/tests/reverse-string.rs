@@ -51,3 +51,19 @@ fn test_a_sentence_with_punctuation() {
 fn test_a_palindrome() {
     process_reverse_case("racecar", "racecar");
 }
+
+
+#[test]
+/// Unicode
+fn test_unicode() {
+    process_reverse_case("Dobrý den", "ned ýrboD");
+}
+
+
+#[test]
+#[ignore]
+/// decomposed Unicode: String::chars cannot handle it
+fn test_decomposed_unicode() {
+    // it looks like 3 characters but they are 4 codepoins: "C", "̌", "a", "u"
+    process_reverse_case("Čau", "uaČ");
+}
