@@ -1,16 +1,22 @@
 pub fn build_proverb(list: Vec<&str>) -> String {
-    let mut lines: Vec<String> = vec![];
-    let mut i = list.iter().rev().peekable();
+    let mut lines: Vec<String> = vec![]; // result
+    let mut i = list.iter().peekable();
+    let mut op_first: Option<&str> = None; // the originally missing thing
     loop {
         match i.next() {
-            Some(a) => {
-                match i.peek() {
-                    Some(b) => { lines.push(want_x_lose_y(b, a)); },
-                    None    => { lines.reverse();
-                                 lines.push(want(a)); },
-                }
-            }
             None => break,
+            Some(a) => {
+                let first: &str = match op_first {
+                    Some(f) => f,
+                    None    => { op_first = Some(a); a },
+                };
+
+                let line = match i.peek() {
+                    Some(b) => want_x_lose_y(a, b),
+                    None    => want(first),
+                };
+                lines.push(line);
+            }
         }
     }
 
